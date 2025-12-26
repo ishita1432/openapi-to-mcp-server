@@ -1,0 +1,4 @@
+{
+  "spec_path": "examples/fakestore_openapi.json",
+  "use_real_api": false
+}
