@@ -1,0 +1,119 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pizza Delivery API",
+    "version": "1.0.0",
+    "description": "Order delicious pizzas with our comprehensive API"
+  },
+  "servers": [
+    {
+      "url": "https://api.pizza-delivery.com/v1"
+    }
+  ],
+  "paths": {
+    "/menu": {
+      "get": {
+        "operationId": "listMenu",
+        "summary": "List available pizzas",
+        "description": "Get all available pizzas with their prices and toppings",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["classic", "specialty", "vegetarian"]
+            },
+            "description": "Filter by pizza category"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of pizzas"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "operationId": "placeOrder",
+        "summary": "Place a pizza order",
+        "description": "Create a new pizza order with delivery details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["pizza_id", "size", "customer_name", "address"],
+                "properties": {
+                  "pizza_id": {
+                    "type": "string",
+                    "description": "ID of the pizza to order"
+                  },
+                  "size": {
+                    "type": "string",
+                    "enum": ["small", "medium", "large", "xlarge"],
+                    "description": "Pizza size"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "default": 1,
+                    "description": "Number of pizzas"
+                  },
+                  "customer_name": {
+                    "type": "string",
+                    "description": "Customer name"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "Contact phone number"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "Delivery address"
+                  },
+                  "extra_toppings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Additional toppings"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created successfully"
+          }
+        }
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "operationId": "trackOrder",
+        "summary": "Track an order",
+        "description": "Get the current status of an order",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order details"
+          }
+        }
+      }
+    }
+  }
+}
