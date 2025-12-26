@@ -17,7 +17,7 @@ This system ingests OpenAPI specifications and automatically generates a fully c
 
 ```bash
 # Clone or download the repository
-cd mcp-server-demo
+cd openai-to-mcp-server
 
 # Install dependencies
 pip install mcp fastmcp httpx pyyaml
@@ -29,7 +29,7 @@ Create `mcp_config.json`:
 
 ```json
 {
-  "spec_path": "./pizza_openapi.json",
+  "spec_path": "examples/pizza_openapi.json",
   "use_real_api": false
 }
 ```
